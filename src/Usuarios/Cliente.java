@@ -3,7 +3,6 @@ package Usuarios;
 import Usuarios.Utils.Rol;
 import Usuarios.Utils.Sucursales;
 import Tarjetas.Tarjeta;
-
 import java.time.LocalDate;
 
 public class Cliente extends Usuario {
