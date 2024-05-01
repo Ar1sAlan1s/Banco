@@ -79,4 +79,7 @@ public class Usuario {
     public Rol getRol() {
         return rol;
     }
+    public String toString() {
+        return String.format("Nombre:%s Apellidos:%s FechaDeNacimiento:%s Ciudad:%s Estado:%s, RFC:%s Curp:%s Direccion:%s ",nombre,apellidos,fechaNacimiento,ciudad,estado,RFC,Curp,direccion);
+    }
 }
