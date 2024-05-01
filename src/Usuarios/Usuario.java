@@ -4,8 +4,8 @@ import Usuarios.Utils.Sucursales;
 
 import java.time.LocalDate;
 public class Usuario {
-    private String usuario;
-    private String password;
+    protected String usuario;
+    protected String password;
     protected String nombre;
     protected String apellidos;
     protected LocalDate fechaNacimiento;
@@ -32,4 +32,51 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getRFC() {
+        return RFC;
+    }
+
+    public String getCurp() {
+        return Curp;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public Sucursales getSucursales() {
+        return sucursales;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
 }
