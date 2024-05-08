@@ -59,7 +59,7 @@ public class Banco {
         usuario= ValidacionesYRegistros.validarUsuario(usuario);
         System.out.println("ingrese su contraseña: ");
         String contraseña=leer.nextLine();
-        LocalDate fechaDeNacimiento= ValidacionesYRegistros.RegistrarFEchaDeNacimiento();
+        LocalDate fechaDeNacimiento= ValidacionesYRegistros.RegistrarFechaDeNacimiento();
         System.out.println("ingrese su ciudad: ");
         String ciudad=leer.nextLine();
         ciudad= ValidacionesYRegistros.validarCiudad(ciudad);
@@ -87,11 +87,16 @@ public class Banco {
         String direccion = datosComunes.get(7);
         String usuario = datosComunes.get(8);
         String contraseña = datosComunes.get(9);
-        Cliente cliente = new Cliente(usuario, contraseña, nombre, apellido, fechaNacimiento, ciudad, estado, RFC, Curp, direccion, null, Rol.Cliente, null, null);
+        Sucursales sucursales = ValidacionesYRegistros.ElegirSucursal();
+        Cliente cliente = new Cliente(usuario, contraseña, nombre, apellido, fechaNacimiento, ciudad, estado, RFC, Curp, direccion, sucursales, Rol.Cliente, null, null);
         insertarCliente(cliente);
 
+
         return cliente;
+
+
     }
+
 
 
 
