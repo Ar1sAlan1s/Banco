@@ -4,6 +4,7 @@ import Usuarios.Cliente;
 import Usuarios.Empleado;
 import Usuarios.Usuario;
 import Usuarios.Utils.Rol;
+import Usuarios.Utils.Sucursales;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,11 +17,12 @@ import java.util.Random;
 public class Banco {
     static Scanner leer = new Scanner(System.in);
     static Random ran = new Random();
-
-    HashMap<String, Usuario> listaUsuarios = new HashMap<>();
+    public static final HashMap<Rol, ArrayList<Usuario>> listaUsuarios = new HashMap<>();
     HashMap<String, Empleado> listaEmpleado = new HashMap<>();
     HashMap<String, Cliente> listaCliente = new HashMap<>();
     public Banco() {
+        Empleado Gerente1 = new Empleado("Gerente1","23","Juan","Perez", LocalDate.now(),"Morelia","Mich","12222","12222","Av Tec de morelia", Sucursales.Acueducto, Rol.Gerente);
+        insertarEmpleado(Gerente1);
         this.ValidacionesYRegistros = new ValidacionesYRegistros(this);
     }
 
@@ -29,12 +31,20 @@ public class Banco {
 
     public void insertarEmpleado(Empleado empleado) {
         listaEmpleado.put(empleado.getUsuario(), empleado);
-        listaUsuarios.put(empleado.getUsuario(), empleado);
+        listaUsuarios.put(Rol.Gerente, new ArrayList<>());
+        listaUsuarios.put(Rol.Capturista, new ArrayList<>());
+        listaUsuarios.put(Rol.Ejecutivos, new ArrayList<>());
+        listaUsuarios.put(Rol.Inversionista, new ArrayList<>());
+        listaUsuarios.get(Rol.Gerente).add(empleado);
+        listaUsuarios.get(Rol.Capturista).add(empleado);
+        listaUsuarios.get(Rol.Ejecutivos).add(empleado);
+        listaUsuarios.get(Rol.Inversionista).add(empleado);
     }
 
     public void insertarCliente(Cliente cliente) {
         listaCliente.put(cliente.getUsuario(), cliente);
-        listaUsuarios.put(cliente.getUsuario(), cliente);
+        listaUsuarios.put(Rol.Cliente, new ArrayList<>());
+        listaUsuarios.get(Rol.Cliente).add(cliente);
     }
 
     public ArrayList<String> RegistrarDatosComunes(){
@@ -87,8 +97,16 @@ public class Banco {
 
 
     //getters and setters
-    public HashMap<String, Usuario> getListaUsuarios() {
-        return listaUsuarios;
-    }
 
+
+    public Usuario comprobarInicioSesion(String usuario, String contraseña){
+        for(ArrayList<Usuario> userList : listaUsuarios.values()){
+            for(Usuario usuarioActual : userList) {
+                if (usuarioActual.getUsuario().equals(usuario) && usuarioActual.getPassword().equals(contraseña)) {
+             return usuarioActual;
+                }
+            }
+        }
+        return null;
+    }
 }

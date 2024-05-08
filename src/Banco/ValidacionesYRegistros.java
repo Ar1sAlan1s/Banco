@@ -3,6 +3,7 @@ import Usuarios.Usuario;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -72,10 +73,14 @@ public class ValidacionesYRegistros {
     /////////////////////////////////////////////////////////////////////////////////////////////
     public String validarUsuario(String usuario) {
         boolean nombreUsuarioExistente = false;
-        for (Usuario usuarioExistente : banco.listaUsuarios.values()) {
-            if (usuarioExistente != null && usuarioExistente.getUsuario().equals(usuario)) {
-                nombreUsuarioExistente = true;
-                break;
+        for (ArrayList<Usuario> usuarioExistente : Banco.listaUsuarios.values()) {
+            if (usuarioExistente != null) {
+                for (Usuario usuario1: usuarioExistente) {
+                    if(usuario1.getUsuario().equals(usuario)){
+                        nombreUsuarioExistente = true;
+                        break;
+                    }
+                }
             }
         }
         if (nombreUsuarioExistente) {

@@ -12,6 +12,6 @@ public class Credito extends Tarjeta{
     public void SolicitarTarjetaCredito(){
         System.out.println("**cBienvenido a la opcion de solicitud de tarjeta de credito**");
         System.out.println("Ingrese el tipo de tarjeta a solicitar:");
-        for ()
+        //for ()
     }
 }
