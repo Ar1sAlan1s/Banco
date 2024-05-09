@@ -97,13 +97,7 @@ public class Banco {
 
     }
 
-
-
-
-
     //getters and setters
-
-
     public Usuario comprobarInicioSesion(String usuario, String contraseña){
         for(ArrayList<Usuario> userList : listaUsuarios.values()){
             for(Usuario usuarioActual : userList) {
