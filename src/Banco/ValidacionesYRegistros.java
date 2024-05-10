@@ -19,7 +19,6 @@ public class ValidacionesYRegistros {
         this.banco = banco;
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
     public String validarNombre(String nombre) {
         while (true) {
             boolean nombreValido = true;
@@ -37,7 +36,6 @@ public class ValidacionesYRegistros {
                 System.out.println("El/los nombre(s) no es válido(s). Ingrese solo letras y como máximo un espacio entre nombres.");
                 System.out.println("Ingrese su nombre nuevamente: ");
                 nombre = leer.nextLine();
-                contador = 0;
             } else {
                 break;
             }
@@ -46,7 +44,6 @@ public class ValidacionesYRegistros {
         return nombre;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     public String validarApellido(String apellido) {
         while (true) {
             boolean apellidoValido = true;
@@ -64,7 +61,6 @@ public class ValidacionesYRegistros {
                 System.out.println("los apellidos no son validos no ingrese caracteres erroneos o coloque mas de 2 apellidos");
                 System.out.println("Ingrese sus apellidos nuevamente: ");
                 apellido = leer.nextLine();
-                cont = 0;
             } else {
                 break;
             }
@@ -73,7 +69,6 @@ public class ValidacionesYRegistros {
         return apellido;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////
     public String validarUsuario(String usuario) {
         boolean nombreUsuarioExistente = false;
         for (ArrayList<Usuario> usuarioExistente : Banco.listaUsuarios.values()) {
@@ -93,6 +88,7 @@ public class ValidacionesYRegistros {
         }
         return usuario;
     }
+
     public LocalDate RegistrarFechaDeNacimiento() {
         boolean fechaValida = false;
         LocalDate fechaDeNacimiento = null;
@@ -157,8 +153,6 @@ public class ValidacionesYRegistros {
         return fechaDeNacimiento;
     }
 
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
     public String validarCiudad(String ciudad) {
         while (true) {
             boolean ciudadValida = true;
@@ -180,7 +174,6 @@ public class ValidacionesYRegistros {
         return ciudad;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
     public String validarEstado(String estado) {
         while (true) {
             boolean EstadoValido = true;
@@ -222,6 +215,7 @@ public class ValidacionesYRegistros {
         System.out.println("Su RFC es: " + RFC);
         return RFC;
     }
+
     public String validarDireccion(String direccion) {
         String[] partesDireccion = direccion.split(",");
         if (partesDireccion.length != 3) {
@@ -245,6 +239,7 @@ public class ValidacionesYRegistros {
             }
         }
     }
+
     public Sucursales ElegirSucursal(){
         boolean SucursalValido = true;
         Sucursales sucursal=null;
@@ -268,6 +263,18 @@ public class ValidacionesYRegistros {
             }
         }
         return sucursal;
+    }
+
+    public static double RegistrarSalario() {
+        Scanner leer=new Scanner(System.in);
+        double salario = 0;
+        try {
+            System.out.println("Ingrese el salario para el empleado");
+            salario = leer.nextDouble();
+        } catch (InputMismatchException e) {
+            System.out.println("Ingrese caracteres correctos");
+        }
+        return salario;
     }
 
 
