@@ -1,5 +1,6 @@
 package Banco;
 
+import Banco.Utils.Herramientas;
 import Usuarios.Usuario;
 import Usuarios.Utils.UsuarioActivo;
 import java.util.Scanner;
@@ -8,11 +9,12 @@ public class Menu {
     private Banco banco = new Banco();
     private Scanner sc = new Scanner(System.in);
 
+//Verificar el inicio de sesión
     public void iniciarSesion() {
         boolean sonDatosCorrectos = false;
 
         do {
-            System.out.println("**Bienvenido al Sistema del Banco**");
+            System.out.println("**Bienvenido al Inicio de sesión del banco**");
             System.out.println("Inicie sesión para continuar.");
 
             System.out.println("Ingresa el nombre de usuario: ");
@@ -32,12 +34,14 @@ public class Menu {
             }
         } while (!sonDatosCorrectos);
     }
-    //Función Lambda
+    //Función Lambda para los menus de cada rol
     public void asignarMenu() {
         switch (UsuarioActivo.getInstance().getUsuarioActual().getRol()) {
             case Gerente -> seleccionarMenuGerente();
             case Cliente -> seleccionarMenuCliente();
-
+            case Ejecutivos -> seleccionarMenuEjecutivo();
+            case Capturista -> seleccionarMenuCapturistas();
+            case Inversionista -> seleccionarMenuInversionista();
         }
     }
 
@@ -52,8 +56,7 @@ public class Menu {
             System.out.println("5. Cerrar sesión Actual.");
             System.out.println("Seleccione algo de la lista por favor: ");
 
-            opcionCliente = sc.nextInt();
-            sc.nextLine(); //Limpiar el buffer
+            opcionCliente = Herramientas.nextInt();
 
             switch (opcionCliente) {
                 case 1:
@@ -82,36 +85,33 @@ public class Menu {
         int opcionGerente = 0;
         do{
             System.out.println("MENU GERENTE");
-            System.out.println("1.-Registrar Cliente, Gerente, Capturista, Ejecutivo o Inversionista");
-            System.out.println("2.-Eliminar Cliente, Gerente, Capturista, Ejecutivo o Inversionista");
-            System.out.println("3.-Modificar Cliente, Gerente, Capturista, Ejecutivo o Inversionista");
-            System.out.println("4.-Mostrar Clientes, Gerentes, Capturistas, Ejecutivos o Inversionistas");
+            System.out.println("1.-Registrar Cliente, Capturista, Ejecutivo o Inversionista");
+            System.out.println("2.-Eliminar Cliente, Capturista, Ejecutivo o Inversionista");
+            System.out.println("3.-Modificar Cliente, Capturista, Ejecutivo o Inversionista");
+            System.out.println("4.-Mostrar Clientes, Capturistas, Ejecutivos o Inversionistas");
             System.out.println("5.-Consultar solicitudes de tarjetas en el sistema.");
             System.out.println("6.-Consultar Inversiones en el banco.");
             System.out.println("7.-Cerrar sesión Actual.");
             System.out.println("Ingrese la opcion deseada: ");
 
-            opcionGerente = sc.nextInt();
-            sc.nextLine(); //Limpiar el Buffer
+            opcionGerente = Herramientas.nextInt();
 
             switch (opcionGerente){
                 case 1:
-                    int opcionRegistro = 0;
+                    int opcionRegistrar = 0;
                     do {
-                        System.out.println("Has elegido registrar");
-                        System.out.println("¿A quien desea Registrar?");
+                        System.out.println("Has elegido modificar");
+                        System.out.println("¿A quien desea modificar?");
                         System.out.println("1.-Cliente.");
-                        System.out.println("2.-Gerente.");
-                        System.out.println("3.-Capturista.");
-                        System.out.println("4.-Ejecutivo.");
-                        System.out.println("5.-Inversionista.");
-                        System.out.println("6.-Salir del Registro.");
-                        System.out.println("Seleccione una opcion: ");
+                        System.out.println("2.-Capturista.");
+                        System.out.println("3.-Ejecutivo.");
+                        System.out.println("4.-Inversionista.");
+                        System.out.println("5.-Salir de la modificación.");
+                        System.out.println("Seleccione una opción: ");
 
-                        opcionRegistro = sc.nextInt();
-                        sc.nextLine();
+                        opcionRegistrar = Herramientas.nextInt();
 
-                        switch (opcionRegistro){
+                        switch (opcionRegistrar){
                             case 1:
 
                                 break;
@@ -125,17 +125,12 @@ public class Menu {
 
                                 break;
                             case 5:
-
-                                break;
-                            case 6:
-                                System.out.println("\nSaliendo del registro. . .");
+                                System.out.println("\nSaliendo de la modificación. . .");
                                 break;
                             default:
-                                System.out.println("Opcion invalida. Vuelva a intentarlo");
-
+                                System.out.println("Opción invalida. Vuelva a intentarlo");
                         }
-
-                    }while(opcionRegistro != 6);
+                    }while(opcionRegistrar != 5);
                     break;
                 case 2:
                     int opcionEliminar = 0;
@@ -143,15 +138,13 @@ public class Menu {
                         System.out.println("Has elegido eliminar");
                         System.out.println("¿A quien desea Eliminar?");
                         System.out.println("1.-Cliente.");
-                        System.out.println("2.-Gerente.");
-                        System.out.println("3.-Capturista.");
-                        System.out.println("4.-Ejecutivo.");
-                        System.out.println("5.-Inversionista.");
-                        System.out.println("6.-Salir de la eliminación.");
+                        System.out.println("2.-Capturista.");
+                        System.out.println("3.-Ejecutivo.");
+                        System.out.println("4.-Inversionista.");
+                        System.out.println("5.-Salir de la eliminación.");
                         System.out.println("Seleccione una opcion: ");
 
-                        opcionEliminar = sc.nextInt();
-                        sc.nextLine();
+                        opcionEliminar = Herramientas.nextInt();
 
                         switch (opcionEliminar){
                             case 1:
@@ -167,15 +160,13 @@ public class Menu {
 
                                 break;
                             case 5:
-
-                                break;
-                            case 6:
                                 System.out.println("\nSaliendo de la eliminación. . .");
                                 break;
                             default:
                                 System.out.println("Opcion invalida. Vuelva a intentarlo");
+
                         }
-                    }while(opcionEliminar != 6);
+                    }while(opcionEliminar != 5);
                     break;
                 case 3:
                     int opcionModificar = 0;
@@ -183,15 +174,13 @@ public class Menu {
                         System.out.println("Has elegido modificar");
                         System.out.println("¿A quien desea modificar?");
                         System.out.println("1.-Cliente.");
-                        System.out.println("2.-Gerente.");
-                        System.out.println("3.-Capturista.");
-                        System.out.println("4.-Ejecutivo.");
-                        System.out.println("5.-Inversionista.");
-                        System.out.println("6.-Salir de la modificación.");
+                        System.out.println("2.-Capturista.");
+                        System.out.println("3.-Ejecutivo.");
+                        System.out.println("4.-Inversionista.");
+                        System.out.println("5.-Salir de la modificación.");
                         System.out.println("Seleccione una opción: ");
 
-                        opcionModificar = sc.nextInt();
-                        sc.nextLine();
+                        opcionModificar = Herramientas.nextInt();
 
                         switch (opcionModificar){
                             case 1:
@@ -207,15 +196,13 @@ public class Menu {
 
                                 break;
                             case 5:
-
-                                break;
-                            case 6:
                                 System.out.println("\nSaliendo de la modificación. . .");
                                 break;
                             default:
                                 System.out.println("Opción invalida. Vuelva a intentarlo");
+
                         }
-                    }while(opcionModificar != 6);
+                    }while(opcionModificar != 5);
                     break;
                 case 4:
                     int opcionMostrar = 0;
@@ -223,15 +210,14 @@ public class Menu {
                         System.out.println("Has elegido Mostrar");
                         System.out.println("¿A quienes desea mostrar en especifico?");
                         System.out.println("1.-Cliente.");
-                        System.out.println("2.-Gerente.");
-                        System.out.println("3.-Capturista.");
-                        System.out.println("4.-Ejecutivo.");
-                        System.out.println("5.-Inversionista.");
-                        System.out.println("6.-Salir.");
+                        System.out.println("2.-Capturista.");
+                        System.out.println("3.-Ejecutivo.");
+                        System.out.println("4.-Inversionista.");
+                        System.out.println("5.-Salir.");
                         System.out.println("Seleccione una opción: ");
 
-                        opcionMostrar = sc.nextInt();
-                        sc.nextLine();
+                        opcionMostrar = Herramientas.nextInt();
+
 
                         switch (opcionMostrar){
                             case 1:
@@ -247,15 +233,12 @@ public class Menu {
 
                                 break;
                             case 5:
-
-                                break;
-                            case 6:
                                 System.out.println("\nSaliendo de mostrar en especifico. . .");
                                 break;
                             default:
                                 System.out.println("Opcion invalida. Vuelva a intentarlo");
                         }
-                    }while(opcionMostrar != 6);
+                    }while(opcionMostrar != 5);
                     break;
                 case 5:
 
@@ -264,28 +247,128 @@ public class Menu {
 
                     break;
                 case 7:
-                    System.out.println("\nCerrando la sesión actual redireccionando al inicio de sesión.");
+                    System.out.println("\nCerrando la sesión actual. Redireccionando al inicio de sesión.");
                     UsuarioActivo.getInstance().cerrarSesionActiva();
+                    iniciarSesion();
                     break;
+                default:
+                    System.out.println("Opción invalida. Vuelva a intentarlo");
             }
         }while(opcionGerente != 7);
     }
 
+    public void seleccionarMenuEjecutivo(){
+        int opcionEjecutivo = 0;
+        do {
+            System.out.println("**BIENVENIDO AL BANCO**");
+            System.out.println("1.-Registrar Cliente");
+            System.out.println("2.-Eliminar Cliente");
+            System.out.println("3.-Modificar Cliente");
+            System.out.println("4.-Mostrar Clientes");
+            System.out.println("5.-Salir del Menu");
+            System.out.println("Seleccione el proceso a realizar: ");
+
+            opcionEjecutivo = Herramientas.nextInt();
+
+            switch (opcionEjecutivo){
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+                    System.out.println("\nCerrando la sesión actual. Redireccionando al inicio de sesión.");
+                    UsuarioActivo.getInstance().cerrarSesionActiva();
+                    iniciarSesion();
+                    break;
+                default:
+                    System.out.println("Opcion invalida. Vuelva a intentarlo");
+
+            }
+        }while(opcionEjecutivo != 5);
+    }
+    public void seleccionarMenuCapturistas(){
+        int opcionCapturistas = 0;
+        do{
+            System.out.println("**BIENVENIDO AL BANCO**");
+            System.out.println("1.-Registrar a un nuevo ejecutivo.");
+            System.out.println("2.-Modificar a un ejecutivo.");
+            System.out.println("3.-Mostrar a todos los ejecutivos del sistema.");
+            System.out.println("4.Salir del menu.");
+            System.out.println("Seleccione la operación a realizar: ");
+
+            opcionCapturistas = Herramientas.nextInt();
+
+            switch(opcionCapturistas){
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    System.out.println("\nCerrando la sesión actual. Redireccionando al inicio de sesión.");
+                    UsuarioActivo.getInstance().cerrarSesionActiva();
+                    iniciarSesion();
+                    break;
+                default:
+                    System.out.println("Ingrese una opción valida.");
+            }
+
+        }while(opcionCapturistas != 5);
+    }
+    public void seleccionarMenuInversionista(){
+        int opcionInversionista = 0;
+        do{
+            System.out.println("**BIENVENIDO AL BANCO**");
+            System.out.println("1.-Agregar fondos al banco.");
+            System.out.println("2.-Cerrar sesión.");
+            System.out.println("Elija una opción: ");
+
+            opcionInversionista = Herramientas.nextInt();
+
+            switch (opcionInversionista){
+                case 1:
+
+                    break;
+                case 2:
+                    System.out.println("\nCerrando la sesión actual. Redireccionando al inicio de sesión.");
+                    UsuarioActivo.getInstance().cerrarSesionActiva();
+                    iniciarSesion();
+                    break;
+                default:
+                    System.out.println("Opcion invalida. Vuelva a intentarlo");
+            }
+        }while(opcionInversionista != 2);
+    }
+
+//-------------------------------------------------MENU GENERAL-------------------------------------------------
     public void ejecutarMenuBanco(){
         boolean bandera = true;
         do{
-        System.out.println("**BIENVENIDO AL BANCO**");
+        System.out.println("**BIENVENIDO AL SISTEMA DEL BANCO**");
         System.out.println("1. Iniciar Sesión.");
         System.out.println("2. Cerrar Sesión.");
         System.out.println("Elija su opción: ");
-        int opcion = sc.nextInt();
-        sc.nextLine();//Limpiar buffer
+
+        int opcion = Herramientas.nextInt();
+
         switch(opcion) {
             case 1:
                 iniciarSesion();
                 break;
             case 2:
-                System.out.println("Cerrando sesión. . .");
+                System.out.println("\nCerrando sesión. . .");
                 bandera = false;
                 break;
             default:
