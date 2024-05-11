@@ -87,7 +87,7 @@ public class Banco {
         String direccion = datosComunes.get(7);
         String usuario = datosComunes.get(8);
         String contraseña = datosComunes.get(9);
-        Cliente cliente = new Cliente(usuario, contraseña, nombre, apellido, fechaNacimiento, ciudad, estado, RFC, Curp, direccion, null, Rol.Cliente);
+        Cliente cliente = new Cliente(usuario, contraseña, nombre, apellido, fechaNacimiento, ciudad, estado, RFC, Curp, direccion, null, Rol.Cliente, null, null);
         insertarCliente(cliente);
 
         return cliente;
