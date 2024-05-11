@@ -38,7 +38,11 @@ public class  Debito extends Tarjeta{
                 }
             } catch (InputMismatchException ex) {
                 System.out.println("Ingresa un numero de dinero");
+                scan.nextLine();
             }
         }
+    }
+    public void mostrarSaldo() {
+        System.out.println("El saldo de su tarjeta de credito es: " + getSaldo());
     }
 }
