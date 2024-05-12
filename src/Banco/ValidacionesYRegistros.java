@@ -14,11 +14,6 @@ public class ValidacionesYRegistros {
     Scanner leer = new Scanner(System.in);
     Random ran = new Random();
     Banco banco;
-
-    public ValidacionesYRegistros(Banco banco) {
-        this.banco = banco;
-    }
-
     public String validarNombre(String nombre) {
         while (true) {
             boolean nombreValido = true;
@@ -276,6 +271,7 @@ public class ValidacionesYRegistros {
         }
         return salario;
     }
+
 
 
 }
