@@ -1,5 +1,5 @@
 package Usuarios;
-
+import Banco.Banco;
 import Tarjetas.Credito;
 import Tarjetas.Debito;
 import Tarjetas.Utils.TiposCredito;
@@ -8,6 +8,7 @@ import Usuarios.Utils.Sucursales;
 import Tarjetas.Tarjeta;
 import java.time.LocalDate;
 import java.util.*;
+import static Banco.Banco.listaUsuarios;
 
 
 public class Cliente extends Usuario {
@@ -28,6 +29,32 @@ public class Cliente extends Usuario {
         this.debito= new Debito(usuario,password, TiposCredito.debito);
         this.id=generarId();
     }
+    public void RegistrarCliente(Empleado capturistaOgerente) {
+        Banco banco = new Banco(); // Esto podría no ser necesario si ya tienes una instancia de Banco
+        ArrayList<String> datosComunes = banco.RegistrarDatosComunes();
+        String nombre = datosComunes.get(0);
+        String apellido = datosComunes.get(1);
+        LocalDate fechaNacimiento = LocalDate.parse(datosComunes.get(2));
+        String ciudad = datosComunes.get(3);
+        String estado = datosComunes.get(4);
+        String RFC = datosComunes.get(5);
+        String Curp = datosComunes.get(6);
+        String direccion = datosComunes.get(7);
+        String usuario = datosComunes.get(8);
+        String contraseña = datosComunes.get(9); // Aquí deberías validar la contraseña
+        Sucursales sucursales = capturistaOgerente.getSucursales();
+
+        Cliente cliente = new Cliente(usuario, contraseña, nombre, apellido, fechaNacimiento, ciudad, estado, RFC, Curp, direccion, sucursales, Rol.Cliente);
+
+        // Comprueba si el cliente ya existe
+        if (!banco.listaCliente.containsKey(cliente.getUsuario())) {
+            banco.listaCliente.put(cliente.getUsuario(), cliente);
+            listaUsuarios.get(cliente.getRol()).add(cliente);
+        } else {
+            System.out.println("El cliente ya está registrado.");
+        }
+    }
+
 
     public String getStatus() {
         return status;

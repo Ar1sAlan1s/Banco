@@ -12,7 +12,7 @@ public class Credito extends Tarjeta{
     public Credito(String usuario, String password, TiposCredito tipo) {
         super(usuario, password, tipo);
         if(tipo==TiposCredito.simplicity){
-        setSaldo(60000);
+            setSaldo(60000);
         } else if (tipo==TiposCredito.platino) {
             setSaldo(150000);
         } else if (tipo==TiposCredito.oro) {
@@ -22,4 +22,3 @@ public class Credito extends Tarjeta{
 
 
 }
-
